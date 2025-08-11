@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    image: fcr-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [ gpu ]
+    ports:
+       - "0.0.0.0:9010:9010"
+    restart: unless-stopped
